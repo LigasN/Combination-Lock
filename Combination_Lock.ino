@@ -10,7 +10,7 @@ decode_results results;
 LiquidCrystal lcd(12,11,5,4,3,2);
 int portA1 = A1, portA2 = A2, portA3 = A3, portA4 = A4;
 int V1, V2, V3, V4;
-int keyCode, counter = 0,  password = 2222, developerPassword = 9999;
+int keyCode, counter = 0,  password = 0000, developerPassword = 9999;
 int writtenPassword, oldPassword, newPassword;
 int remoteValue = 0;
 boolean activity = false, changingState = false;
@@ -22,7 +22,7 @@ void setup()
   Serial.begin(9600);
   SPI.begin(); 
   lcd.begin(16,2);
-  pinMode(6,OUTPUT);
+  pinMode(7,OUTPUT);
   irrecv.enableIRIn();
 }
 
@@ -84,9 +84,7 @@ void check()
               lcd.print("INCORRECT");
               lcd.setCursor(6,1);
               lcd.print("PASSWORD");
-              digitalWrite(7,HIGH);
               delay(3000);
-              digitalWrite(7,LOW);
              }
                  
            activity=false;
@@ -196,13 +194,6 @@ void KeyIdentyfication()
   else if ((V4>550 && V4<800) || remoteValue == -28561 )
   {
   keyCode = "#";
-  // counter++;
-  }
-  
-  else if (V4>960)
-  {
-  keyCode = "O";
-   //counter++;
   }
   
   else if ((V3>100 && V3<300) || remoteValue == 17085  )
